@@ -3,23 +3,38 @@ import bcrypt from 'bcrypt';
 
 // this bcrypt is use to encrpt and dcrypt the information
 
-const app =  express();
+const app = express();
 
 
-app.get( "/"   ,(req,resp)=>{
+// is route pe jaate hi  "/" function chal jayega
+
+app.get("/",
+    (req, resp) => {
+
+// 10 default value hai
+        bcrypt.genSalt(10, function (err, salt) {
+
+            //  bs aik random string hai jise salt khte hai
+            console.log(salt );
+
+            bcrypt.hash( ".gp258dmw", salt, function (err, hash) {
+
+                // is hash ko hum apna password maan skte hai
+                // and store krrr skte hai
+              console.log(hash);
+              resp.send(hash);
+            });
 
 
 
- bcrypt.genSalt(saltRounds, function (err, salt) {
-
-    bcrypt.hash(myPlaintextPassword, salt, function (err, hash) {
-        // Store hash in your password DB.
-    });
+        });
 
 
 
-}     );
-}
+
+
+
+    }
 
 
 
@@ -27,4 +42,4 @@ app.get( "/"   ,(req,resp)=>{
 
 
 
-app.listedn(1200);
+app.listen(1200);
